@@ -16,7 +16,7 @@ conn = connect(":memory:", adapter_kwargs={
 
 # The Form questions
 with st.form("survey_form"):
-    year_level = st.selectbox("What year level are you?", ["10", "11", "12"])
+    year_level = st.selectbox("What year level are you?", ["10", "11", "12", "Staff Member"])
 
     # Question 1: Priorities (Multiselect is better here since they pick 3)
     priorities = st.multiselect(
