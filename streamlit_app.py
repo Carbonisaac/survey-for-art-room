@@ -5,7 +5,7 @@ from shillelagh.backends.apsw.db import connect
 st.title("Art Room Survey")
 
 # Link to your sheet from secrets.toml
-sheet_url = st.secrets["private_gsheets_url"]["https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=0"]
+sheet_url = st.secrets["https://docs.google.com/spreadsheets/d/1tEY9eqfu8xEAS8Y0cpZ_GbLj3LpJnsHB2ihALs9HD8o/edit?usp=sharing"]["url"]
 
 # Create connection
 conn = connect(":memory:", adapter_kwargs={
