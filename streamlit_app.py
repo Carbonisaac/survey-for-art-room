@@ -8,11 +8,14 @@ st.title("Art Room Survey")
 sheet_url = st.secrets["private_gsheets_url"]["url"]
 
 # Create connection
-conn = connect(":memory:", adapter_kwargs={
-    "gsheetsapi": {
-        "service_account_info": st.secrets["gcp_service_account"].to_dict()
+conn = connect(
+    ":memory:", 
+    adapter_kwargs={
+        "gsheetsapi": {
+            "service_account_info": st.secrets["gcp_service_account"].to_dict()
+        }
     }
-})
+)
 
 # The Form questions
 with st.form("survey_form"):
@@ -63,12 +66,3 @@ if submit:
         except Exception as e:
             st.error(f"An error occurred while saving: {e}")
 
-# Updated connection block
-conn = connect(":memory:", 
-    adapters=["gsheetsapi"], 
-    adapter_kwargs={
-        "gsheetsapi": {
-            "service_account_info": st.secrets["gcp_service_account"].to_dict()
-        }
-    }
-)
