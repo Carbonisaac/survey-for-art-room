@@ -62,3 +62,13 @@ if submit:
             st.success("Thank you! Your response has been recorded.")
         except Exception as e:
             st.error(f"An error occurred while saving: {e}")
+
+# Updated connection block
+conn = connect(":memory:", 
+    adapters=["gsheetsapi"], 
+    adapter_kwargs={
+        "gsheetsapi": {
+            "service_account_info": st.secrets["gcp_service_account"].to_dict()
+        }
+    }
+)
