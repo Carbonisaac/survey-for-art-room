@@ -56,7 +56,7 @@ if submit:
             priorities_str = ", ".join(priorities)
             
             # Your SQL query (Ensure your Google Sheet headers match these names exactly)
-            query = f"INSERT INTO '{sheet_url}' (year, priorities, atmosphere, feature, dream) VALUES ('{year_level}', '{priorities_str}', '{vibe}', '{feature}', '{dream_feature}')"
+            query = f'INSERT INTO "{sheet_url}" (year, priorities, atmosphere, feature, dream) VALUES ("{year_level}", "{priorities_str}", "{vibe}", "{feature}", "{dream_feature}")'
             
             cursor.execute(query)
             st.success("Thank you! Your response has been recorded.")
