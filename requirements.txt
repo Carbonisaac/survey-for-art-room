@@ -1,2 +1,2 @@
 streamlit
-shillelagh[gsheets]
+shillelagh[gsheetsapi]
