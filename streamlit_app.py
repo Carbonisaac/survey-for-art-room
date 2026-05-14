@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 from shillelagh.backends.apsw.db import connect
 
 st.title("Art Room Survey")
@@ -49,7 +50,6 @@ if submit:
     # Updated query to match your new variables
     query = f"INSERT INTO '{sheet_url}' (year, priorities, atmosphere, feature, dream) VALUES ('{year_level}', '{priorities_str}', '{vibe}', '{feature}', '{dream_feature}')"
 
-    import os
 
 # Check if a specific cloud environment variable exists
 if "STREAMLIT_RUNTIME_ENV" in os.environ:
