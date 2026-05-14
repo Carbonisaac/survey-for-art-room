@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 from shillelagh.backends.apsw.db import connect
 
 st.title("Art Room Survey")
@@ -7,7 +8,6 @@ st.title("Art Room Survey")
 sheet_url = st.secrets["private_gsheets_url"]["url"]
 
 # Create connection
-# We add .to_dict() to the end of the service account info
 conn = connect(":memory:", adapter_kwargs={
     "gsheetsapi": {
         "service_account_info": st.secrets["gcp_service_account"].to_dict()
@@ -18,7 +18,7 @@ conn = connect(":memory:", adapter_kwargs={
 with st.form("survey_form"):
     year_level = st.selectbox("What year level are you?", ["10", "11", "12", "Staff Member"])
 
-    # Question 1: Priorities (Multiselect is better here since they pick 3)
+    # Question 1: Priorities
     priorities = st.multiselect(
         "Which of the following art supplies or equipment would you use most often? (Select up to 3)",
         ["Digital drawing tablets", "Traditional painting", "3D/Pottery", "Textiles/Fashion", "Printmaking", "Photography", "Music creation"]
@@ -41,9 +41,7 @@ with st.form("survey_form"):
     
     submit = st.form_submit_button("Submit Data")
 
-if submit:
-    # ... (your form inputs are above here) ...
-
+# Handling the submission
 if submit:
     # 1. Validation Check: Make sure no fields are empty
     if not year_level or not priorities or not vibe or not feature or not dream_feature:
@@ -51,22 +49,16 @@ if submit:
     
     else:
         # 2. If everything is filled out, run the database code
-        cursor = conn.cursor()
-        
-        # Convert the list of priorities into one string
-        priorities_str = ", ".join(priorities)
-        
-        # Your SQL query
-        query = f"INSERT INTO '{sheet_url}' (year, priorities, atmosphere, feature, dream) VALUES ('{year_level}', '{priorities_str}', '{vibe}', '{feature}', '{dream_feature}')"
-        
-        cursor.execute(query)
-        st.success("Thank you! Your response has been recorded.")
-    cursor = conn.cursor()
-    # Convert list to string for SQL storage
-    priorities_str = ", ".join(priorities)
-    
-    # Updated query to match your new variables
-    query = f"INSERT INTO '{sheet_url}' (year, priorities, atmosphere, feature, dream) VALUES ('{year_level}', '{priorities_str}', '{vibe}', '{feature}', '{dream_feature}')"
-
-    cursor.execute(query)
-    st.success("Thank you for completing this survey!")
+        try:
+            cursor = conn.cursor()
+            
+            # Convert the list of priorities into one string
+            priorities_str = ", ".join(priorities)
+            
+            # Your SQL query (Ensure your Google Sheet headers match these names exactly)
+            query = f"INSERT INTO '{sheet_url}' (year, priorities, atmosphere, feature, dream) VALUES ('{year_level}', '{priorities_str}', '{vibe}', '{feature}', '{dream_feature}')"
+            
+            cursor.execute(query)
+            st.success("Thank you! Your response has been recorded.")
+        except Exception as e:
+            st.error(f"An error occurred while saving: {e}")
