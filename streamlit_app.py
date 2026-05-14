@@ -20,7 +20,7 @@ with st.form("survey_form"):
 
     # Question 1: Priorities
     priorities = st.multiselect(
-        "Which of the following art supplies or equipment would you use most often? (Select up to 3)",
+        "Which of the following art supplies or equipment would you use most often? (Select minimum 1)",
         ["Digital drawing tablets", "Wood burners", "Traditional painting", "3D/Pottery", "Textiles/Fashion", "Printmaking", "Photography", "Music creation"]
     )
     
