@@ -42,6 +42,25 @@ with st.form("survey_form"):
     submit = st.form_submit_button("Submit Data")
 
 if submit:
+    # ... (your form inputs are above here) ...
+
+if submit:
+    # 1. Validation Check: Make sure no fields are empty
+    if not year_level or not priorities or not vibe or not feature or not dream_feature:
+        st.error("Please answer all questions before submitting!")
+    
+    else:
+        # 2. If everything is filled out, run the database code
+        cursor = conn.cursor()
+        
+        # Convert the list of priorities into one string
+        priorities_str = ", ".join(priorities)
+        
+        # Your SQL query
+        query = f"INSERT INTO '{sheet_url}' (year, priorities, atmosphere, feature, dream) VALUES ('{year_level}', '{priorities_str}', '{vibe}', '{feature}', '{dream_feature}')"
+        
+        cursor.execute(query)
+        st.success("Thank you! Your response has been recorded.")
     cursor = conn.cursor()
     # Convert list to string for SQL storage
     priorities_str = ", ".join(priorities)
