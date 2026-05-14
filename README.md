@@ -1,8 +1,8 @@
-# 🎈 Blank app template
+# Art survey
 
-A simple Streamlit app template for you to modify!
+A survey for the urban college art room
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+[![Open in Streamlit](https://urban-college-survey-for-art-room.streamlit.app/)
 
 ### How to run it on your own machine
 
@@ -15,5 +15,5 @@ A simple Streamlit app template for you to modify!
 2. Run the app
 
    ```
-   $ streamlit run streamlit_app.py
+   $ streamlit run app.py
    ```
