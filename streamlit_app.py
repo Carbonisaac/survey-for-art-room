@@ -33,7 +33,7 @@ with st.form("survey_form"):
     # Question 3: Functional features
     feature = st.selectbox(
         "Aside from art supplies, what functional feature is most important to you?",
-        ["Comfortable seating", "Adjustable lighting", "Better storage/lockers", "Resource Library"]
+        ["Comfortable seating", "Adjustable lighting", "Better storage", "Resources"]
     )
     
     # Question 4: Open Suggestion
